@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.http import HttpRequest, HttpResponse
+from  . import  forms
 
 def login_view(request:HttpRequest) -> HttpResponse:
     if request.method=='POST':
@@ -10,8 +11,20 @@ def login_view(request:HttpRequest) -> HttpResponse:
 
         if user is None:
             print('Все не правильно')
-        else: 
+        else:
             login(request, user)
             return redirect('/')
-        
+
     return render(request, 'login/login.html')
+
+
+def register_view(request: HttpRequest) -> HttpResponse:
+    if request.method == "GET":
+        form = forms.RegisterForm()
+        return render(request, 'login/register.html', {
+            'form': form
+        })
+
+def logout_view(request: HttpResponse)-> HttpResponse:
+    logout(request)
+    return redirect("/")
