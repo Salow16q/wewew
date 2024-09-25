@@ -1,21 +1,13 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'home/style.css' %}">
-    <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
-    <title>Title</title>
-</head>
-<body>
-    {% include 'home/header.html' %}
-    <h1>Регистрация</h1>
+{% extends 'home/base.html' %}
+{% block title %} Coolshop - регистрация {% endblock%}
+
+{% block content %}
+<h1>Регистрация</h1>
     <div>
         <form method="get" action="/register/">
             {% csrf_token %}
             {{ form.as_table }}
-            <button type="submit">Зарегестрироваться</button>
+            <button type="submit">Зарегистрироваться</button>
         </form>
     </div>
-</body>
-</html>
+{% endblock%}
